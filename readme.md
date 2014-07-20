@@ -38,25 +38,25 @@ Config files are stored in the `deploy` directory unless you specify a custom di
 First run `nd init` and answer the questions. It will try to guess some settings for you – if you're happy with the guess, just hit enter to accept it:
 
 ```no-highlight
-node v0.10.8 in ~/Desktop/app on master 
+node v0.10.8 in ~/Desktop/app on master
 → nd init
 app url: martinrue.com
 app name (app): martinrue.com
-app entry point (blog.js): 
-upstream port (4001): 
-app path on server (/var/www): 
-nginx sites-enabled path (/etc/nginx/sites-enabled): 
-git clone URL (git@github.com:martinrue/delme.git): 
+app start command (node blog.js):
+upstream port (4001):
+app path on server (/var/www):
+nginx sites-enabled path (/etc/nginx/sites-enabled):
+git clone URL (git@github.com:martinrue/delme.git):
 server SSH address: root@192.168.2.4
 ```
 
 Second, commit and push the newly created config files:
 
 ```no-highlight
-node v0.10.8 in ~/Desktop/app on master 
+node v0.10.8 in ~/Desktop/app on master
 → git add -A
 
-node v0.10.8 in ~/Desktop/app on master 
+node v0.10.8 in ~/Desktop/app on master
 → git commit -m "add deploy config"
 [master 9a0def5] add deploy config
  3 files changed, 30 insertions(+)
@@ -64,7 +64,7 @@ node v0.10.8 in ~/Desktop/app on master
  create mode 100644 deploy/martinrue.com
  create mode 100644 deploy/martinrue.com.conf
 
-node v0.10.8 in ~/Desktop/app on master with unpushed 
+node v0.10.8 in ~/Desktop/app on master with unpushed
 → git push
 Counting objects: 7, done.
 Delta compression using up to 4 threads.
@@ -78,7 +78,7 @@ To git@github.com:martinrue/martinrue.git
 And finally, deploy:
 
 ```no-highlight
-node v0.10.8 in ~/Desktop/app on master 
+node v0.10.8 in ~/Desktop/app on master
 → nd deploy
 deploying master to root@192.168.2.4:/var/www/martinrue.com
 ```
@@ -90,33 +90,49 @@ After running `nd init`, you'll be asked a series of questions. Here's what each
 
 This is the public URL your app will be served from.
 
+Example: `martinrue.com`
+
 ####app name
 
 Specifies the name of the app directory and the nginx/upstart config files.
 
-####app entry point
+Example: `martinrue.com`
 
-The app's main `.js` file. This is the file that `node` will execute when your app starts.
+####app start command
+
+The command used to start the application on the server.
+
+Example: `node app.js`
 
 ####upstream port
 
 The port the node app listens on. This is needed to properly link the node process with the upstream nginx server.
 
+Example: `1234`
+
 ####app path on server
 
 The directory the app will be cloned into and run from on the server.
+
+Example: `/var/www`
 
 ####nginx sites-enabled path
 
 The path of the nginx `sites-enabled` directory. The nginx config file will be copied here.
 
+Example: `/etc/nginx/sites-enabled`
+
 ####git clone URL
 
 The URL of the repo. The repo is cloned on the first deploy and then pulled from thereafter.
 
+Example: `git@github.com:martinrue/martinrue.com.git`
+
 ####server SSH address
 
-The user + host address of the server, i.e. `root@yourserver.com`.
+The SSH user + host address of the server.
+
+Example: `root@yourserver.com`
 
 ## Notes
 - Following a successful deploy, `nd` will wait a further 15 seconds (to account for the configured respawn limits of upstart) to verify the app process is still alive and well.
@@ -127,6 +143,6 @@ The user + host address of the server, i.e. `root@yourserver.com`.
 
 - It's assumed that **all** files in the `sites-enabled` nginx directory are valid config files, i.e. that your `nginx.conf` includes them using something like this `include /etc/nginx/sites-enabled/*;`.
 
-## Testing
+## License
 
-Tests are written using mocha, and can be executed via `npm test`.
+MIT

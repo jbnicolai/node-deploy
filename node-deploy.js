@@ -4,7 +4,6 @@ var scripts = require('./lib/scripts');
 var config = require('./lib/config');
 var deploy = require('./lib/deploy');
 var pkg = require('./package.json');
-var _ = require('lodash');
 
 var showUsage = function() {
   console.log('usage: nd [init | deploy | remove] -b <branch> -d <directory>');
@@ -13,7 +12,7 @@ var showUsage = function() {
 var getArgs = function() {
   var getOptionValue = function(option, defaultValue) {
     var options = process.argv.slice(3);
-    var index = _.indexOf(options, option);
+    var index = options.indexOf(option);
     return index === -1 ? defaultValue : options[index + 1];
   };
 
@@ -24,18 +23,18 @@ var getArgs = function() {
   };
 };
 
-var getSettings = function(args, onFound) {
+var getSettings = function(args, callback) {
   var settings = config.load(args.directory + '/deploy.json');
 
   if (!settings) {
-    console.log('\'' + args.directory + '\' config directory not found in – run [nd init] first');
+    console.log(process.cwd() + '/' + args.directory + ' does not exist – run [nd init] first');
     return process.exit(1);
   }
 
   settings.directory = args.directory;
   settings.branch = args.branch;
 
-  return onFound(settings);
+  return callback(settings);
 };
 
 var init = function(args) {

@@ -1,19 +1,14 @@
 {
   "name": "node-deploy",
-  "version": "0.0.3",
-  "description": "Makes deploying node web apps to nginx+upstart machines easy",
+  "version": "0.1.0",
+  "description": "Makes deploying node web apps to nginx + upstart machines easy",
   "main": "node-deploy.js",
   "author": "Martin Rue",
   "homepage": "https://github.com/martinrue/node-deploy",
-  "license": "BSD",
+  "license": "MIT",
   "dependencies": {
-    "async": "~0.2.9",
-    "glob": "~3.2.1",
-    "chalk": "^0.4.0",
-    "lodash": "^2.4.1"
-  },
-  "scripts": {
-    "test": "mocha --reporter spec"
+    "async": "^0.9.0",
+    "chalk": "^0.5.1"
   },
   "repository": {
     "type": "git",
@@ -21,9 +16,5 @@
   },
   "bin": {
     "nd": "node-deploy.js"
-  },
-  "devDependencies": {
-    "chai": "^1.9.0",
-    "mocha": "^1.18.0"
   }
 }
