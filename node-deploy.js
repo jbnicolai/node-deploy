@@ -33,15 +33,18 @@ var getSettings = function(args, callback) {
 
   settings.directory = args.directory;
   settings.branch = args.branch;
+  settings.sshport = settings.sshport || 22;
 
   return callback(settings);
 };
 
 var init = function(args) {
   config.generate(function(settings) {
-    if (!config.validate(settings)) return;
-    scripts.generate(args.directory, settings);
-    config.save(args.directory + '/deploy.json', settings);
+
+    if (config.validate(settings)) {
+      scripts.generate(args.directory, settings);
+      config.save(args.directory + '/deploy.json', settings);
+    }
   });
 };
 

@@ -130,9 +130,9 @@ Example: `git@github.com:martinrue/martinrue.com.git`
 
 ####server SSH address
 
-The SSH user + host address of the server.
+The SSH user + host address of the server. You can specify a non-22 SSH port number by using a `:` after the hostname.
 
-Example: `root@yourserver.com`
+Example: `root@yourserver.com:3022`
 
 ## Notes
 - Following a successful deploy, `nd` will wait a further 15 seconds (to account for the configured respawn limits of upstart) to verify the app process is still alive and well.
